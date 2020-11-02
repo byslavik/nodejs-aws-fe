@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {makeStyles} from "@material-ui/core/styles";
 import {CartItem} from "models/CartItem";
-import {formatAsPrice} from "utils/utils";
+import {formatAsPrice, getTitle} from "utils/utils";
 import AddProductToCart from "components/AddProductToCart/AddProductToCart";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +36,7 @@ export default function CartItems({items, isEditable}: CartItemsProps) {
         {items.map((cartItem: CartItem) => (
           <ListItem className={classes.listItem} key={cartItem.product.id}>
             {isEditable && <AddProductToCart product={cartItem.product}/>}
-            <ListItemText primary={cartItem.product.title} secondary={cartItem.product.description}/>
+            <ListItemText primary={getTitle(cartItem.product)} secondary={cartItem.product.description}/>
             <Typography
               variant="body2">{formatAsPrice(cartItem.product.price)} x {cartItem.count} = {formatAsPrice(cartItem.product.price * cartItem.count)}</Typography>
           </ListItem>
