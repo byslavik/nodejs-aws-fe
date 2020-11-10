@@ -34,6 +34,8 @@ const Form = (props: FormikProps<FormikValues>) => {
     // shouldConfirmLeave,
   } = props;
 
+  console.log(props)
+
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
       <Grid container spacing={2}>
@@ -55,6 +57,17 @@ const Form = (props: FormikProps<FormikValues>) => {
             fullWidth
             autoComplete="off"
             multiline
+            required
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Field
+            component={TextField}
+            name="imgurl"
+            label="Image url"
+            fullWidth
+            autoComplete="off"
             required
           />
         </Grid>

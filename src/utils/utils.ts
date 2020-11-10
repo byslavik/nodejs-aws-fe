@@ -6,4 +6,4 @@ const priceFormatter = new Intl.NumberFormat('en-US', {
 });
 
 export const formatAsPrice = (price: number) => priceFormatter.format(price);
-export const getTitle = (product: Product) => `${product.brand_name} ${product.title}`
+export const getTitle = (product: Product) => `${product.title}`
