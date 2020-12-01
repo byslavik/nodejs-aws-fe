@@ -15,7 +15,7 @@ axios.interceptors.response.use(
   function(error) {
     const { status, data } = error.response;
   
-    const errorData = data?.data;
+    const errorData = data?.message;
     if (status === 400) {
       alert(`Bad request: ${errorData}`);
     }
@@ -24,6 +24,9 @@ axios.interceptors.response.use(
     }
     if (status === 401) {
       alert(`Unauthorized: ${errorData}`);
+    }
+    if (status === 500) {
+      alert(`Server error: ${errorData}`);
     }
 
     return Promise.reject(error.response);
