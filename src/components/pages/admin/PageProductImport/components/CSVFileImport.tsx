@@ -15,6 +15,19 @@ type CSVFileImportProps = {
   title: string
 };
 
+const getHeaders = () => {
+  const token = localStorage.getItem('authorization_token');
+
+  if (!token) {
+    return {}
+  }
+  return {
+    headers: {
+      Authorization: String(token),
+    },
+  }
+}
+
 export default function CSVFileImport({url, title}: CSVFileImportProps) {
   const classes = useStyles();
   const [file, setFile] = useState<any>();
@@ -37,11 +50,12 @@ export default function CSVFileImport({url, title}: CSVFileImportProps) {
         url,
         params: {
           name: encodeURIComponent(file.name)
-        }
+        },
+        ...getHeaders()
       })
       console.log('File to upload: ', file.name)
       console.log('Uploading to: ', response.data)
-      const result = await fetch(response.data, {
+      const result = await fetch(response.data.signedUrl, {
         method: 'PUT',
         body: file
       })
